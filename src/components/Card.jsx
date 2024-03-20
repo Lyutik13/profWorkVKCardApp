@@ -15,6 +15,8 @@ export const Card = ({ title, description, price, image }) => {
 		setCount(1);
 	};
 
+	const priceOneCard = (price * count).toFixed(0);
+
 	return (
 		<div className="card">
 			<div className="card__img">
@@ -40,7 +42,7 @@ export const Card = ({ title, description, price, image }) => {
 				</button>
 			</div>
 			<div className="card__price">
-				<b>{(price * count).toFixed(0)} ₽</b>{" "}
+				<b>{priceOneCard} ₽</b>
 			</div>
 			<div>
 				<div onClick={onClickDel} className="button button--outline button--circle">

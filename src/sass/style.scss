@@ -85,7 +85,8 @@ p {
 }
 
 .contentStyle {
-	width: 600px;
+	max-width: 600px;
+	min-width: 280px;
 	min-height: 200px;
 	background-color: #0958d9;
 	color: #fff;
@@ -115,35 +116,35 @@ p {
 			width: 100%;
 			height: 100%;
 			object-fit: contain;
-      background-color: #fff;
+			background-color: #fff;
 		}
 	}
 	&__content {
-    width: 200px;
+		width: 200px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 	}
 	&__count {
-    width: 100px;
+		width: 100px;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 10px;
 	}
 	&__title {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -moz-box;
-    -moz-box-orient: vertical;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    line-clamp: 1;
-    box-orient: vertical;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -moz-box;
+		-moz-box-orient: vertical;
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
+		line-clamp: 1;
+		box-orient: vertical;
 	}
 	&__description {
-    padding-top: 5x;
+		padding-top: 5x;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: -moz-box;
@@ -154,27 +155,35 @@ p {
 		line-clamp: 2;
 		box-orient: vertical;
 	}
-  &__price {
-    width: 100px;
-  }
+	&__price {
+		width: 100px;
+	}
 
-  @media (max-width: 998px) {
-    flex-direction: column;
-  }
+	@media (max-width: 998px) {
+		flex-direction: column;
+	}
 
-  &__img {
-    border: 1px solid #0958d9;
-    display: inline-block;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background-color: #fff;
-    }
-  }
+	&__img {
+		border: 1px solid #0958d9;
+		display: inline-block;
+		border-radius: 50%;
+		overflow: hidden;
+		width: 100px;
+		height: 100px;
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			background-color: #fff;
+		}
+	}
 }
 
+@media (max-width: 750px) {
+	main {
+		flex-direction: column-reverse;
+		flex-wrap: wrap;
+		align-items: center !important;
+		row-gap: 20px;
+	}
+}
