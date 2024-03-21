@@ -185,5 +185,11 @@ p {
 		flex-wrap: wrap;
 		align-items: center !important;
 		row-gap: 20px;
+    margin: 10px !important;
 	}
+
+  .layoutStyle {
+    width: calc(99% - 15px);
+    max-width: calc(99% - 15px);
+}
 }

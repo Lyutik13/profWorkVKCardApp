@@ -1,21 +1,20 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-export const Card = ({ title, description, price, image }) => {
-	const [count, setCount] = React.useState(1);
+import { plusItemsCard, minusItemsCard } from "../redux/itemsSlice";
+
+export const Card = ({ props, deleteItems }) => {
+	const { id, title, description, price, image, count } = props;
+	const priceOneCard = (price * count).toFixed(0);
+	const dispatch = useDispatch();
 
 	const onClickPlus = () => {
-		setCount(count + 1);
+		dispatch(plusItemsCard({ id }));
 	};
 
 	const onClickMinus = () => {
-		setCount(count - 1);
+		dispatch(minusItemsCard({ id }));
 	};
-
-	const onClickDel = () => {
-		setCount(1);
-	};
-
-	const priceOneCard = (price * count).toFixed(0);
 
 	return (
 		<div className="card">
@@ -29,14 +28,14 @@ export const Card = ({ title, description, price, image }) => {
 			<div className="card__count">
 				<button
 					disabled={count === 1}
-					onClick={onClickMinus}
+					onClick={() => onClickMinus(id)}
 					className="button button--outline button--circle cart__item-count-minus">
 					-
 				</button>
 				<b>{count}</b>
 				<button
 					disabled={count === 10}
-					onClick={onClickPlus}
+					onClick={() => onClickPlus(id)}
 					className="button button--outline button--circle cart__item-count-plus">
 					+
 				</button>
@@ -45,7 +44,7 @@ export const Card = ({ title, description, price, image }) => {
 				<b>{priceOneCard} ₽</b>
 			</div>
 			<div>
-				<div onClick={onClickDel} className="button button--outline button--circle">
+				<div onClick={() => deleteItems(id)} className="button button--outline button--circle">
 					del
 				</div>
 			</div>

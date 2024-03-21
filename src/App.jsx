@@ -3,14 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Card from "./components/Card.jsx";
 import { fetchItems } from "./redux/asyncActions.jsx";
+import { deleteItemsCard } from "./redux/itemsSlice.jsx";
 
-import AppContext from "./context.jsx";
 import "./sass/style.scss";
 
 export default function App() {
+	const { items, status, totalPrice } = useSelector((state) => state.items);
+	const dispatch = useDispatch();
 
-	const { items, status } = useSelector((state) => state.items);
-  const dispatch = useDispatch();
+	const deleteItems = (id) => {
+		dispatch(deleteItemsCard(id));
+	};
 
 	// React.useEffect(() => {
 	// 	const fetchData = async () => {
@@ -32,25 +35,23 @@ export default function App() {
 	// 	fetchData();
 	// }, []);
 
-	const loadingItems = async () => {
-		dispatch(fetchItems());
-	};
-
 	React.useEffect(() => {
-		loadingItems();
+		dispatch(fetchItems());
 	}, []);
 
+	console.log(items);
+
 	return (
-		<AppContext.Provider value={{}}>
-			<div className="layoutStyle">
-				<header className="headerStyle">Корзина</header>
-				<main className="main">
-					<section className="contentStyle">
-						{status !== 'success' ? "loaging" : items.map((item) => <Card key={item.id} {...item} />)}
-					</section>
-					<section className="contentStyle">Итого: 500 руб.</section>
-				</main>
-			</div>
-		</AppContext.Provider>
+		<div className="layoutStyle">
+			<header className="headerStyle">Корзина</header>
+			<main className="main">
+				<section className="contentStyle">
+					{status !== "success" || items.length === 0
+						? "loaging"
+						: items.map((item) => <Card key={item.id} props={item} deleteItems={deleteItems} />)}
+				</section>
+				<section className="contentStyle">Итого: {totalPrice} руб.</section>
+			</main>
+		</div>
 	);
 }
