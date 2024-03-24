@@ -1,19 +1,16 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "./redux/store.js";
 
 import Card from "./components/Card.jsx";
 import { fetchItems } from "./redux/asyncActions.jsx";
-import { deleteItemsCard } from "./redux/itemsSlice.jsx";
 
 import "./sass/style.scss";
+import { RootState } from "./redux/store.js";
 
 export default function App() {
-	const { items, status, totalPrice } = useSelector((state) => state.items);
-	const dispatch = useDispatch();
-
-	const deleteItems = (id) => {
-		dispatch(deleteItemsCard(id));
-	};
+	const { items, status, totalPrice } = useSelector((state: RootState) => state.items);
+	const dispatch = useAppDispatch();
 
 	// React.useEffect(() => {
 	// 	const fetchData = async () => {
@@ -37,9 +34,8 @@ export default function App() {
 
 	React.useEffect(() => {
 		dispatch(fetchItems());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	console.log(items);
 
 	return (
 		<div className="layoutStyle">
@@ -48,7 +44,16 @@ export default function App() {
 				<section className="contentStyle">
 					{status !== "success" || items.length === 0
 						? "loaging"
-						: items.map((item) => <Card key={item.id} props={item} deleteItems={deleteItems} />)}
+						: items.map((item) => (
+								<Card
+									key={item.id}
+									id={item.id}
+									title={item.title}
+									description={item.description}
+									price={item.price}
+									image={item.image}
+									count={item.count}
+								/>))}
 				</section>
 				<section className="contentStyle">Итого: {totalPrice} руб.</section>
 			</main>
