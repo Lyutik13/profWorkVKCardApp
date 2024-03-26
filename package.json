@@ -2,7 +2,7 @@
   "name": "search-project",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Lyutik13.github.io/profWorkVKTest/",
+  "homepage": "https://Lyutik13.github.io/profWorkVKCardApp/",
   "type": "module",
   "scripts": {
     "dev": "vite",
